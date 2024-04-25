@@ -13,7 +13,7 @@ public class RoomMapper {
 
         room.setBooked(roomDto.isBooked());
         room.setFloor(roomDto.getFloor());
-        room.setType(room.getType());
+        room.setType(roomDto.getType());
         return room;
     }
 
