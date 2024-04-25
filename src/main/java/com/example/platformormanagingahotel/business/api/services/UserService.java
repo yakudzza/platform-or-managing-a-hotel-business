@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-  /*  private final UserRepository userRepository;
+ private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public boolean createUser(User user){
@@ -27,5 +27,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.getRoles().add(Role.CLIENT);
 
-    }*/
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.platformormanagingahotel.business.api.controllers;
 
 
 import com.example.platformormanagingahotel.business.api.dto.RoomDto;
+import com.example.platformormanagingahotel.business.api.entities.Room;
 import com.example.platformormanagingahotel.business.api.services.RoomService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,22 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
-    @GetMapping("/getRoomData")
-    public ResponseEntity<RoomDto> getRoomData(@RequestParam Long id){
+    @PatchMapping
+    public ResponseEntity<Long> bookRoom(){
+        //todo
+        return ResponseEntity.ok().build();
+    }
 
-        RoomDto roomDto = roomService.findRoomById(id);
+    @PostMapping()
+    public ResponseEntity<Long> addRoom(@RequestBody RoomDto roomDto){
+        RoomDto roomDto1 = roomService.addRoom(roomDto);
+        return ResponseEntity.ok().body(roomDto1.getId());
+    }
+
+    @GetMapping()
+    public ResponseEntity<RoomDto> getRoomData(@RequestParam Long roomId){
+
+        RoomDto roomDto = roomService.findRoomById(roomId);
         return ResponseEntity.ok().body(roomDto);
     }
 }

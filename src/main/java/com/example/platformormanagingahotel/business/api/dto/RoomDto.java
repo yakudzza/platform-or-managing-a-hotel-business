@@ -11,4 +11,5 @@ public class RoomDto {
     String type;
     int floor;
     boolean isBooked;
+
 }
