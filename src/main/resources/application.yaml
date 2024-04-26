@@ -2,7 +2,7 @@ spring:
   application:
     name: "platform-or-managing-a-hotel-business"
   datasource:
-    url: jdbc:postgresql://93.93.207.141:5432/postgres
+    url: jdbc:postgresql://93.93.207.141:5432/hotel
     username: postgres
     password: password
     driver-class-name: org.postgresql.Driver
