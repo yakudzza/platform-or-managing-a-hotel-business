@@ -1,12 +1,15 @@
 package com.example.platformormanagingahotel.business.api.dto;
 
 
+import com.example.platformormanagingahotel.business.api.entities.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Data
@@ -29,5 +32,5 @@ public class UserDto {
     private String passportNumber;
     private String citizenship;
     private boolean isActive;
-    private String role;
+    private Set<Role> roles;
 }
