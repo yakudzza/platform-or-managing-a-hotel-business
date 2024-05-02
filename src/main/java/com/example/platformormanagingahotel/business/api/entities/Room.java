@@ -1,8 +1,12 @@
 package com.example.platformormanagingahotel.business.api.entities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import jakarta.persistence.*;
-import lombok.*;
+
 
 @Getter
 @Entity
