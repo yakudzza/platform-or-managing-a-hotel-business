@@ -1,7 +1,7 @@
 package com.example.platformormanagingahotel.business.api.entities;
 
 
-
+import com.example.platformormanagingahotel.business.api.entities.enums.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Getter
 @Setter
 @Builder
@@ -21,8 +20,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "user")
-public class UserEntity implements UserDetails{
+@Table(name = "users")
+public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,20 +52,25 @@ public class UserEntity implements UserDetails{
 
     @Builder.Default
     private Instant createdAt = Instant.now();
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> roles;
+    @Enumerated(EnumType.STRING)
+    private Set<Roles> roles = new HashSet<>();
+    private boolean active;
 
 
 
     //Security
+    public boolean isAdmin() {
+        return roles.contains(Roles.ROLE_ADMIN);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
+        return roles;
     }
 
     @Override
     public String getUsername() {
-        return getEmail();
+        return email;
     }
 
     @Override
@@ -86,6 +90,6 @@ public class UserEntity implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return active;
     }
 }
