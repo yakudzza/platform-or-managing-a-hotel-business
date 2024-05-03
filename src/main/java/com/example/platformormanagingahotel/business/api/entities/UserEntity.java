@@ -6,14 +6,12 @@ import lombok.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Collection;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -47,14 +45,7 @@ public class UserEntity {
     @Builder.Default
     private Instant createdAt = Instant.now();
 
-    @ManyToMany
-    @JoinTable(
-            name = "roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Collection<RoleEntity> roles;
-
+    private String role;
 
     private boolean active;
 
