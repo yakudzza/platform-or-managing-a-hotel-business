@@ -16,11 +16,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<UserEntity> user = userRepository.findByEmail(email);
+        Optional<UserEntity> user = repository.findByEmail(email);
         if (user.isPresent()) {
             UserEntity userObj = user.get();
             return User.builder()
