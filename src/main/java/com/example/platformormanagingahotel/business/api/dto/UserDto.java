@@ -31,5 +31,5 @@ public class UserDto {
     private String passportNumber;
     private String citizenship;
     private boolean isActive;
-    private Set<RoleEntity> roles;
+    private String role;
 }
