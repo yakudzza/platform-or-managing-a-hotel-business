@@ -1,47 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Home - Spring Boot Security Tutorial</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #3cd9e7;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #fff;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
 
-    .container {
-      text-align: center;
-      background-color: #2299a4;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 400px;
-      width: 100%;
-    }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-    h1 {
-      color: #ffffff;
-    }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-    p {
-      font-size: 18px;
-      margin-bottom: 20px;
-    }
+        .user-info {
+            margin-top: 20px;
+        }
 
-  </style>
+        .user-info div {
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        span {
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-  <h1>Welcome, User!</h1>
-  <p>This is the user home page. Explore and access your user-specific features.</p>
+    <h1>User Information</h1>
+    <div class="user-info">
+        <div>
+            <label>First Name: </label>
+            <span th:text="${user.firstName}"></span>
+        </div>
+        <div>
+            <label>Last Name: </label>
+            <span th:text="${user.lastName}"></span>
+        </div>
+        <!-- Другие поля пользователя -->
+    </div>
 </div>
 </body>
 </html>
