@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Login</title>
     <style>
         body {
@@ -54,6 +54,21 @@
         button:hover {
             background-color: #45a049;
         }
+
+        /* Стили для ссылки на страницу регистрации */
+        .registration-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .registration-link a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+
+        .registration-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -61,13 +76,18 @@
     <h2>Login</h2>
     <form action="/login" method="post">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+        <input id="username" name="username" required type="text">
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input id="password" name="password" required type="password">
 
         <button type="submit">Login</button>
     </form>
+
+    <!-- Ссылка для перехода на страницу регистрации -->
+    <div class="registration-link">
+        Don't have an account? <a href="/registration">Register</a>
+    </div>
 </div>
 </body>
 </html>
