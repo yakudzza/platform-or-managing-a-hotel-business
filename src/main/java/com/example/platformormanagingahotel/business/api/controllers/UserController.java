@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -41,14 +42,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/info{id}")
-    public String userInfo(Model model, Principal principal){
-        String username = principal.getName(); // Получаем имя пользователя
-        UserEntity user = userRepository.findByEmail(username) // Ищем пользователя по имени (email)
-                .orElseThrow(() -> new NotFoundException("Пользователь не найден: " + username));
-        model.addAttribute("user", user); // Передаем пользователя в модель
-
-        return "home_user"; // Возвращаем имя представления для отображения информации о пользователе
+    @GetMapping("/user/{id}")
+    public String getUserInfo(@PathVariable Long id, Model model) {
+        UserEntity user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        return "home_user";
     }
 
 

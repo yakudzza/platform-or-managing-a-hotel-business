@@ -46,5 +46,6 @@ public class UserEntity {
     private Instant createdAt = Instant.now();
 
     private String role;
-    
+
+    private boolean active;
 }
