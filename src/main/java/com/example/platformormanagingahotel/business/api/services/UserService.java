@@ -2,6 +2,7 @@ package com.example.platformormanagingahotel.business.api.services;
 
 
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
+import com.example.platformormanagingahotel.business.api.exceptions.NotFoundException;
 import com.example.platformormanagingahotel.business.api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,12 +27,18 @@ public class UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
+        user.setActive(true);
         userRepository.save(user);
         return true;
     }
 
     public Optional<UserEntity> userInfo(UserEntity user){
         return userRepository.findById(user.getId());
+    }
+
+    public UserEntity getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
     }
 
 }
