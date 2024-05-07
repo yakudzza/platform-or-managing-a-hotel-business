@@ -2,10 +2,11 @@ spring:
   application:
     name: "platform-or-managing-a-hotel-business"
   datasource:
-    url: jdbc:postgresql://93.93.207.141:5432/postgres
+    url: jdbc:postgresql://93.93.207.141:5432/hotel
     username: postgres
-    password: password
+    password: Dlc6dPcOLgaVqsJVRo1y9At9oPbaLlLbZDzv3DDn
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: false
