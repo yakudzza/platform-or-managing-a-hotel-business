@@ -1,17 +1,14 @@
 package com.example.platformormanagingahotel.business.api.controllers;
 
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
-import com.example.platformormanagingahotel.business.api.exceptions.NotFoundException;
 import com.example.platformormanagingahotel.business.api.repositories.UserRepository;
 import com.example.platformormanagingahotel.business.api.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.time.LocalDate;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,17 +38,31 @@ public class UserController {
         }
     }
 
-    @GetMapping("/info{id}")
-    public String userInfo(Model model, Principal principal){
-        String username = principal.getName(); // Получаем имя пользователя
-        UserEntity user = userRepository.findByEmail(username) // Ищем пользователя по имени (email)
-                .orElseThrow(() -> new NotFoundException("Пользователь не найден: " + username));
-        model.addAttribute("user", user); // Передаем пользователя в модель
-
-        return "home_user"; // Возвращаем имя представления для отображения информации о пользователе
+    @GetMapping("/home")
+    public String homaPage(){
+        return "home";
     }
 
+    @GetMapping("/user")
+    public String getUserProfile(Model model) {
+        UserEntity user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+        return "user_profile";
+    }
 
+    /*@PostMapping("/user/update")
+    public String updateUserProfile(@ModelAttribute UserEntity updatedUser) {
+
+        userService.updateUser(updatedUser);
+        return "redirect:/user";
+    }
+
+    @GetMapping("/user/update")
+    public String getUpdateProfilePage(Model model) {
+        UserEntity user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+        return "user_edit";
+    }*/
 
 }
 

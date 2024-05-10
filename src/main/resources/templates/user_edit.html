@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #007bff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="email"], input[type="date"] {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit User Profile</h1>
+    <form action="/user/update" method="post">
+        <input type="hidden" name="id" value="${user.id}">
+
+        <!-- Поля для редактирования с информацией о пользователе -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" value="${user.firstName}" placeholder="Enter First Name">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" value="${user.lastName}" placeholder="Enter Last Name">
+
+        <label for="middleName">Middle Name:</label>
+        <input type="text" id="middleName" name="middleName" value="${user.middleName}" placeholder="Enter Middle Name">
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="${updatedUser.email}" placeholder="Enter Email">
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="text" id="phoneNumber" name="phoneNumber" value="${user.phoneNumber}" placeholder="Enter Phone Number">
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" name="dateOfBirth" value="${user.dateOfBirth}" placeholder="Enter Date of Birth">
+
+        <label for="passportSeries">Passport Series:</label>
+        <input type="text" id="passportSeries" name="passportSeries" value="${user.passportSeries}" placeholder="Enter Passport Series">
+
+        <label for="passportNumber">Passport Number:</label>
+        <input type="text" id="passportNumber" name="passportNumber" value="${user.passportNumber}" placeholder="Enter Passport Number">
+
+        <label for="citizenship">Citizenship:</label>
+        <input type="text" id="citizenship" name="citizenship" value="${user.citizenship}" placeholder="Enter Citizenship">
+
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>
