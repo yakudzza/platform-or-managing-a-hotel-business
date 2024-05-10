@@ -6,6 +6,8 @@ import com.example.platformormanagingahotel.business.api.exceptions.NotFoundExce
 import com.example.platformormanagingahotel.business.api.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+
     public boolean createUser(UserEntity user){
         if (userRepository.existsByEmail(user.getEmail())){
-            throw new UsernameNotFoundException("Пользователь с таким " +  user.getEmail() + " уже зарегистрирован");
+            throw new UsernameNotFoundException("Пользователь с данной " +  user.getEmail() + " уже зарегистрирован");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("USER");
@@ -32,13 +35,26 @@ public class UserService {
         return true;
     }
 
-    public Optional<UserEntity> userInfo(UserEntity user){
-        return userRepository.findById(user.getId());
+    public UserEntity getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return null;
+        }
+        String username = authentication.getName();
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new NotFoundException("Пользователь не найден: " + username));
     }
 
-    public UserEntity getUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User not found with id: " + id));
+
+
+   /* public void updateUser(UserEntity updatedUser) {
+        updatedUser = userRepository.findByIdd(updatedUser.getId());
+        if (userRepository.existsById(updatedUser.getId())){
+            throw new NotFoundException("Пользователь не существует");
+        }
+
+
     }
+*/
 
 }

@@ -1,18 +1,14 @@
 package com.example.platformormanagingahotel.business.api.controllers;
 
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
-import com.example.platformormanagingahotel.business.api.exceptions.NotFoundException;
 import com.example.platformormanagingahotel.business.api.repositories.UserRepository;
 import com.example.platformormanagingahotel.business.api.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.time.LocalDate;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,14 +38,31 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/{id}")
-    public String getUserInfo(@PathVariable Long id, Model model) {
-        UserEntity user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "home_user";
+    @GetMapping("/home")
+    public String homaPage(){
+        return "home";
     }
 
+    @GetMapping("/user")
+    public String getUserProfile(Model model) {
+        UserEntity user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+        return "user_profile";
+    }
 
+    /*@PostMapping("/user/update")
+    public String updateUserProfile(@ModelAttribute UserEntity updatedUser) {
+
+        userService.updateUser(updatedUser);
+        return "redirect:/user";
+    }
+
+    @GetMapping("/user/update")
+    public String getUpdateProfilePage(Model model) {
+        UserEntity user = userService.getCurrentUser();
+        model.addAttribute("user", user);
+        return "user_edit";
+    }*/
 
 }
 
