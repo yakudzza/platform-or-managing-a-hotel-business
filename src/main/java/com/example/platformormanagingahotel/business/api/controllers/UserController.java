@@ -2,6 +2,7 @@ package com.example.platformormanagingahotel.business.api.controllers;
 
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
 import com.example.platformormanagingahotel.business.api.repositories.UserRepository;
+import com.example.platformormanagingahotel.business.api.services.HotelService;
 import com.example.platformormanagingahotel.business.api.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final HotelService hotelService;
     @GetMapping("/login")
     public String login() {
         return "custom_login";
@@ -39,7 +41,9 @@ public class UserController {
     }
 
     @GetMapping("/home")
-    public String homaPage(){
+    public String homaPage(Model model){
+
+        model.addAttribute("hotels", hotelService.getAllHotels());
         return "home";
     }
 

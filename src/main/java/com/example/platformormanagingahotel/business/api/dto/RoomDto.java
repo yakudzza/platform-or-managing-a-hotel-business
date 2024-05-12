@@ -1,5 +1,6 @@
 package com.example.platformormanagingahotel.business.api.dto;
 
+import com.example.platformormanagingahotel.business.api.entities.HotelEntity;
 import lombok.*;
 
 @Getter
@@ -11,5 +12,5 @@ public class RoomDto {
     String type;
     int floor;
     boolean isBooked;
-
+    int price;
 }

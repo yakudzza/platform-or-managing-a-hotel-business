@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Домашняя страница</title>
+    <title th:text="${hotel.name}"></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -36,22 +36,28 @@
 </head>
 <body>
 <div class="container">
-    <a href="/user" class="btn">Профиль</a>
-    <a href="hotel/add" class="btn">Добавить Отель</a>
-    <h1>Домашняя страница</h1>
-    <p>Добро пожаловать на домашнюю страницу!</p>
-    <div th:if="${not #lists.isEmpty(hotels)}">
-        <div th:each="hotel : ${hotels}">
+    <h1><span th:text="${hotel.name}"></span></h1>
+    <ul>
+        <li><strong>Address:</strong> <span th:text="${hotel.address}"></span></li>
+        <li><strong>Phone Number:</strong> <span th:text="${hotel.billingInfo}"></span></li>
+        <li><strong>Stars:</strong> <span th:text="${hotel.numOfStars}"></span></li>
+    </ul>
+    <form action="/room/add" method="get">
+        <input type="hidden" name="hotelId" th:value="${hotel.id}" />
+        <button type="submit" class="btn">Add Room</button>
+    </form>
+    <div th:if="${not #lists.isEmpty(rooms)}">
+        <div th:each="room : ${rooms}">
             <tr>
-                <th>Name</th>
+                <th>Type</th>
             </tr>
-            <td th:text="${hotel.name}"></td>
+            <td th:text="${room.type}"></td>
             <tr>
-                <th>Stars: </th>
+                <th>Price: </th>
             </tr>
-            <td th:text="${hotel.numOfStars}"></td>
-            <form th:action="@{'/hotel/' + ${hotel.id}}" method="get">
-                <input type="hidden" name="id" th:value="${hotel.id}" />
+            <td th:text="${room.price}"></td>
+            <form th:action="@{'/room/' + ${room.id}}" method="get">
+                <input type="hidden" name="id" th:value="${room.id}" />
                 <button type="submit">More Info</button>
             </form>
         </div>
