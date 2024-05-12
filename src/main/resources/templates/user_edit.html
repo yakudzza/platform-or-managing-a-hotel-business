@@ -52,8 +52,6 @@
 <div class="container">
     <h1>Edit User Profile</h1>
     <form action="/user/update" method="post">
-        <input type="hidden" name="id" value="${user.id}">
-
         <!-- Поля для редактирования с информацией о пользователе -->
         <label for="firstName">First Name:</label>
         <input type="text" id="firstName" name="firstName" value="${user.firstName}" placeholder="Enter First Name">
@@ -65,7 +63,7 @@
         <input type="text" id="middleName" name="middleName" value="${user.middleName}" placeholder="Enter Middle Name">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="${updatedUser.email}" placeholder="Enter Email">
+        <input type="email" id="email" name="email" value="${user.email}" placeholder="Enter Email">
 
         <label for="phoneNumber">Phone Number:</label>
         <input type="text" id="phoneNumber" name="phoneNumber" value="${user.phoneNumber}" placeholder="Enter Phone Number">

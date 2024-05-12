@@ -47,14 +47,14 @@ public class UserService {
 
 
 
-   /* public void updateUser(UserEntity updatedUser) {
-        updatedUser = userRepository.findByIdd(updatedUser.getId());
-        if (userRepository.existsById(updatedUser.getId())){
+    public void updateUser(UserEntity updatedUser) {
+        if (!userRepository.existsById(updatedUser.getId())) {
             throw new NotFoundException("Пользователь не существует");
         }
 
-
+        userRepository.saveAndFlush(updatedUser);
     }
-*/
+
+
 
 }
