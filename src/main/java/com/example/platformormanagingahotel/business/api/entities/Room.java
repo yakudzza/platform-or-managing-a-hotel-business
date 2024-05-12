@@ -19,6 +19,13 @@ public class Room {
     Long id;
     String type;
     int floor;
+    int roomNum;
+    int cost;
     boolean isBooked;
+    int price;
+    @OneToOne
+    UserEntity user;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    HotelEntity hotel;
 }
 

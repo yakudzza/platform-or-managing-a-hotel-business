@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        h1 {
+            color: #007bff;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Room Info</h1>
+    <ul>
+        <li><strong>Room Type: </strong> <span th:text="${room.type}"></span></li>
+        <li><strong>Room Floor: </strong> <span th:text="${room.floor}"></span></li>
+        <li><strong>Room Price: </strong> <span th:text="${room.price}"></span></li>
+        <li><strong>Is Room Booked: </strong> <span th:text="${room.isBooked}"></span></li>
+    </ul>
+    <a href="/room/book" class="back-button">Back</a>
+</div>
+</body>
+</html>

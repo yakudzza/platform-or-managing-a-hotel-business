@@ -14,6 +14,7 @@ public class RoomMapper {
         room.setBooked(roomDto.isBooked());
         room.setFloor(roomDto.getFloor());
         room.setType(roomDto.getType());
+        room.setPrice(roomDto.getPrice());
         return room;
     }
 
@@ -25,6 +26,7 @@ public class RoomMapper {
         roomDto.setFloor(room.getFloor());
         roomDto.setBooked(room.isBooked());
         roomDto.setType(room.getType());
+        roomDto.setPrice(room.getPrice());
         return roomDto;
     }
 }
