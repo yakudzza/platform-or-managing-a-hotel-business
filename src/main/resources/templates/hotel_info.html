@@ -9,58 +9,157 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to right, #e3e3df, #b3a58b);
         }
-
         .container {
-            max-width: 800px;
-            margin: 20px auto;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f2f2f2;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
         }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+        .sidebar a {
+            display: block;
+            color: #333;
             text-decoration: none;
-            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 18px;
         }
-
-        .btn:hover {
-            background-color: #0056b3;
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: #b3a58b;
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+        .content h1, .content h2 {
+            margin-top: 0;
+        }
+        .details {
+            display: flex;
+            margin-top: 20px;
+        }
+        .details img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .info {
+            flex-grow: 1;
+        }
+        .info h3 {
+            margin-top: 20px;
+        }
+        .info ul {
+            list-style: none;
+            padding: 0;
+        }
+        .info ul li {
+            margin: 5px 0;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: #f5e3a1;
+            color: #333;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button-container button:hover {
+            background-color: #d4c29c;
+        }
+        .navbar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .card {
+            background-color: #a3926a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1><span th:text="${hotel.name}"></span></h1>
-    <ul>
-        <li><strong>Address:</strong> <span th:text="${hotel.address}"></span></li>
-        <li><strong>Phone Number:</strong> <span th:text="${hotel.billingInfo}"></span></li>
-        <li><strong>Stars:</strong> <span th:text="${hotel.numOfStars}"></span></li>
-    </ul>
-    <form action="/room/add" method="get">
-        <input type="hidden" name="hotelId" th:value="${hotel.id}" />
-        <button type="submit" class="btn">Add Room</button>
-    </form>
-    <div th:if="${not #lists.isEmpty(rooms)}">
-        <div th:each="room : ${rooms}">
+    <div class="sidebar">
+        <a href="/home">Home</a>
+        <a href="#">Hotels</a>
+        <a href="#">Packages</a>
+    </div>
+    <div class="content">
+        <div class="navbar">
+            <a href="#">Contact</a>
+            <a href="#">Login</a>
+        </div>
+        <h1><span th:text="${hotel.name}">Hotel Name</span></h1>
+        <div class="details">
+            <div class="images">
+                <tr th:each="image : ${images}">
+                    <img th:src="@{|/images/${image.id}|}" alt="Hotel Image">
+                </tr>
+            </div>
+            <div class="info">
+                <div class="card">
+                    <ul>
+                        <li><strong>Адрес:</strong> <span th:text="${hotel.address}">Hotel Address</span></li>
+                        <li><strong></strong> <span th:text="${hotel.description}">Hotel Phone</span></li>
+                        <li><strong>Рейтинг:</strong> <span th:text="${hotel.numOfStars}">Hotel Stars</span>/5</li>
+                    </ul>
+                    <div class="button-container">
+                        <form action="/room/add" method="get">
+                            <input type="hidden" name="hotelId" th:value="${hotel.id}" />
+                            <button type="submit">Add Room</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table th:if="${not #lists.isEmpty(rooms)}">
+            <thead>
             <tr>
                 <th>Type</th>
+                <th>Price</th>
+                <th>Actions</th>
             </tr>
-            <td th:text="${room.type}"></td>
-            <tr>
-                <th>Price: </th>
+            </thead>
+            <tbody>
+            <tr th:each="room : ${rooms}">
+                <td th:text="${room.type}">Room Type</td>
+                <td th:text="${room.price}">Room Price</td>
+                <td>
+                    <form th:action="@{'/room/' + ${room.id}}" method="get">
+                        <input type="hidden" name="id" th:value="${room.id}" />
+                        <button type="submit">More Info</button>
+                    </form>
+                </td>
             </tr>
-            <td th:text="${room.price}"></td>
-            <form th:action="@{'/room/' + ${room.id}}" method="get">
-                <input type="hidden" name="id" th:value="${room.id}" />
-                <button type="submit">More Info</button>
-            </form>
-        </div>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

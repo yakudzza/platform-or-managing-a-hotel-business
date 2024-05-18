@@ -9,18 +9,129 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f5f5f5;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #3b3a30;
+            padding: 10px 20px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-right: 1px solid #ccc;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+        }
+
+        .sidebar h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar ul li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .main-content {
+            margin-left: 220px;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
         }
 
-        .btn {
+        .hotel-info {
+            background-color: #d4af37;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .hotel-info h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .hotel-info p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .rooms {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .room {
+            position: relative;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            width: 30%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            height: 250px; /* Высота блока номера */
+            display: flex;
+            align-items: flex-end; /* Выравнивание текста по низу */
+        }
+
+        .room-info {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для текста */
+            color: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .room-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .room-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .room-info .price {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .room-info .btn {
             display: inline-block;
             padding: 10px 20px;
             background-color: #007bff;
@@ -29,33 +140,56 @@
             border-radius: 5px;
         }
 
-        .btn:hover {
+        .room-info .btn:hover {
             background-color: #0056b3;
         }
+
     </style>
 </head>
 <body>
-<div class="container">
-    <a href="/user" class="btn">Профиль</a>
-    <a href="hotel/add" class="btn">Добавить Отель</a>
-    <h1>Домашняя страница</h1>
-    <p>Добро пожаловать на домашнюю страницу!</p>
-    <div th:if="${not #lists.isEmpty(hotels)}">
+
+<div class="navbar">
+    <div>
+        <a href="#">Контактная информация</a>
+    </div>
+    <div>
+        <a href="#">Login</a>
+    </div>
+</div>
+
+<div class="sidebar">
+    <h2>Навигация</h2>
+    <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Отели</a></li>
+        <li><a href="#">Путевки</a></li>
+        <li><a href="/user">Профиль</a></li>
+        <li><a href="hotel/add">Добавить Отель</a></li>
+
+    </ul>
+</div>
+
+<div class="main-content">
+    <div class="hotel-info">
+        <h1>ГОСТИНИЦА «МОСКВА»</h1>
+        <p>ПРЕКРАСНОЕ МЕСТО ДЛЯ ОТДЫХА В САМОМ ЦЕНТРЕ ГОРОДА</p>
+        <p>площадь Александра Невского, 2</p>
+    </div>
+
+    <div class="rooms">
         <div th:each="hotel : ${hotels}">
-            <tr>
-                <th>Name</th>
-            </tr>
-            <td th:text="${hotel.name}"></td>
-            <tr>
-                <th>Stars: </th>
-            </tr>
-            <td th:text="${hotel.numOfStars}"></td>
-            <form th:action="@{'/hotel/' + ${hotel.id}}" method="get">
-                <input type="hidden" name="id" th:value="${hotel.id}" />
-                <button type="submit">More Info</button>
-            </form>
+            <div class="room" th:style="'background-image: url(/images/' + ${hotel.getPreviewImageId()} + ');'">
+                <div class="room-info">
+                    <h3 th:text="${hotel.name}">СТАНДАРТ</h3>
+                    <p th:text="${hotel.description + ' места'}">4 места</p>
+                    <p th:text="${hotel.numOfStars + ' м²'}">25 м²</p>
+                    <p class="price" th:text="${hotel.billingInfo + ' р./ночь'}">8 600 р./ночь</p>
+                    <a th:href="'/hotel/' + ${hotel.id}" class="btn">Подробнее...</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

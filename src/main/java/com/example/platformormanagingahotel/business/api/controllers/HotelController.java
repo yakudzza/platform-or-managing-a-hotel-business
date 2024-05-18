@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/hotel")
@@ -18,8 +21,10 @@ public class HotelController {
     @GetMapping("/{id}")
     public String getHotelById(@PathVariable Long id, Model model) {
 
-        model.addAttribute("hotel", hotelService.getHotelById(id));
+        HotelEntity hotelEntity = hotelService.getHotelById(id);
+        model.addAttribute("hotel", hotelEntity);
         model.addAttribute("rooms", hotelService.getRoomsByHotelId(id));
+        model.addAttribute("images", hotelEntity.getImages());
         return "hotel_info";
     }
 
@@ -27,9 +32,10 @@ public class HotelController {
     public String addHotel(){
         return "add_hotel";
     }
-    @PostMapping()
-    public String addHotel(HotelDto hotelDto){
-        hotelService.addHotel(hotelDto);
+
+    @PostMapping
+    public String addHotel(HotelDto hotelDto, @RequestParam("image") MultipartFile file) throws IOException {
+        hotelService.addHotel(hotelDto, file);
         return "redirect:/home";
     }
 

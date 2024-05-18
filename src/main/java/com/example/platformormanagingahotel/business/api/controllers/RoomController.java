@@ -42,6 +42,6 @@ public class RoomController {
     @PostMapping()
     public String addRoom(RoomDto roomDto, @RequestParam("hotelId")Long id){
         roomService.addRoom(roomDto, id);
-        return "redirect:/home";
+        return "redirect:/hotel/" + id;
     }
 }
