@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,23 +17,23 @@
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            background-color: #fff;
+            background-color: #fff.
         }
         h1 {
             color: #007bff;
         }
         form {
             display: flex;
-            flex-direction: column;
+            flex-direction: column.
         }
         label {
-            margin-bottom: 10px;
+            margin-bottom: 10px.
         }
         input[type="text"], input[type="email"], input[type="date"] {
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 5px.
         }
         button {
             padding: 10px 20px;
@@ -41,44 +41,45 @@
             color: #fff;
             border: none;
             border-radius: 5px;
-            cursor: pointer;
+            cursor: pointer.
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #0056b3.
         }
     </style>
 </head>
 <body>
 <div class="container">
     <h1>Edit User Profile</h1>
-    <form action="/user/update" method="post">
-        <!-- Поля для редактирования с информацией о пользователе -->
+    <form action="/user/update" method="post" th:object="${user}">
+        <input type="hidden" th:field="*{id}" />
+
         <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" value="${user.firstName}" placeholder="Enter First Name">
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" placeholder="Enter First Name">
 
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" value="${user.lastName}" placeholder="Enter Last Name">
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="Enter Last Name">
 
         <label for="middleName">Middle Name:</label>
-        <input type="text" id="middleName" name="middleName" value="${user.middleName}" placeholder="Enter Middle Name">
+        <input type="text" id="middleName" name="middleName" th:field="*{middleName}" placeholder="Enter Middle Name">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" value="${user.email}" placeholder="Enter Email">
+        <input type="email" id="email" name="email" th:field="*{email}" placeholder="Enter Email">
 
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" value="${user.phoneNumber}" placeholder="Enter Phone Number">
+        <input type="text" id="phoneNumber" name="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number">
 
         <label for="dateOfBirth">Date of Birth:</label>
-        <input type="date" id="dateOfBirth" name="dateOfBirth" value="${user.dateOfBirth}" placeholder="Enter Date of Birth">
+        <input type="date" id="dateOfBirth" name="dateOfBirth" th:field="*{dateOfBirth}" placeholder="дд.мм.гггг">
 
         <label for="passportSeries">Passport Series:</label>
-        <input type="text" id="passportSeries" name="passportSeries" value="${user.passportSeries}" placeholder="Enter Passport Series">
+        <input type="text" id="passportSeries" name="passportSeries" th:field="*{passportSeries}" placeholder="Enter Passport Series">
 
         <label for="passportNumber">Passport Number:</label>
-        <input type="text" id="passportNumber" name="passportNumber" value="${user.passportNumber}" placeholder="Enter Passport Number">
+        <input type="text" id="passportNumber" name="passportNumber" th:field="*{passportNumber}" placeholder="Enter Passport Number">
 
         <label for="citizenship">Citizenship:</label>
-        <input type="text" id="citizenship" name="citizenship" value="${user.citizenship}" placeholder="Enter Citizenship">
+        <input type="text" id="citizenship" name="citizenship" th:field="*{citizenship}" placeholder="Enter Citizenship">
 
         <button type="submit">Save Changes</button>
     </form>

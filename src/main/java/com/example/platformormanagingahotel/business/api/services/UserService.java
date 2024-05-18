@@ -48,13 +48,20 @@ public class UserService {
 
 
     public void updateUser(UserEntity updatedUser) {
-        if (!userRepository.existsById(updatedUser.getId())) {
-            throw new NotFoundException("Пользователь не существует");
-        }
+        UserEntity existingUser = userRepository.findById(updatedUser.getId())
+                .orElseThrow(() -> new NotFoundException("Пользователь не существует"));
 
-        userRepository.saveAndFlush(updatedUser);
+        existingUser.setFirstName(updatedUser.getFirstName());
+        existingUser.setLastName(updatedUser.getLastName());
+        existingUser.setMiddleName(updatedUser.getMiddleName());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        existingUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        existingUser.setPassportSeries(updatedUser.getPassportSeries());
+        existingUser.setPassportNumber(updatedUser.getPassportNumber());
+        existingUser.setCitizenship(updatedUser.getCitizenship());
+
+        userRepository.saveAndFlush(existingUser);
     }
-
-
 
 }
