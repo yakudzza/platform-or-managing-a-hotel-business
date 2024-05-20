@@ -131,8 +131,8 @@
                         <li><strong>Цена:</strong> <span th:text="${room.price}"></span></li>
                     </ul>
                     <div class="button-container">
-                        <form action="@{|/room/${image.id}|}" method="get">
-                            <button type="submit">Edit</button>
+                        <form th:action="@{|/room/book/${room.id}|}" method="post">
+                            <button type="submit">Book</button>
                         </form>
                     </div>
                 </div>

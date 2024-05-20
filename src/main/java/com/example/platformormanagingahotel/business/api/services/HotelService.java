@@ -21,9 +21,9 @@ import java.util.Optional;
 public class HotelService {
     @Autowired
     HotelRepository hotelRepository;
-
     @Autowired
-    ImageRepository imageRepository;
+    ImageService imageService;
+
     @Autowired
     HotelMapper hotelMapper;
     public List<HotelEntity> getAllHotels() {
@@ -48,23 +48,13 @@ public class HotelService {
         HotelEntity hotelEntity = hotelMapper.mapToHotel(hotelDto);
         Image image;
         if (!file.isEmpty()) {
-            image = toImageEntity(file);
+            image = imageService.toImageEntity(file);
             image.setPreviewImage(true);
             hotelEntity.addImage(image);
         }
         HotelEntity savedHotel = hotelRepository.save(hotelEntity);
         savedHotel.setPreviewImageId(savedHotel.getImages().get(0).getId());
         hotelRepository.save(hotelEntity);
-    }
-
-    private Image toImageEntity(MultipartFile file) throws IOException {
-        Image image = new Image();
-        image.setName(file.getName());
-        image.setOriginalFileName(file.getOriginalFilename());
-        image.setContentType(file.getContentType());
-        image.setSize(file.getSize());
-        image.setBytes(ImageUtils.compressImage(file.getBytes()));
-        return image;
     }
     public List<Room> getRoomsByHotelId(Long id) {
 

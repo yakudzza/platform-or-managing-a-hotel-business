@@ -54,19 +54,21 @@ public class UserController {
         return "user_profile";
     }
 
-    /*@PostMapping("/user/update")
-    public String updateUserProfile(@ModelAttribute UserEntity updatedUser) {
-
-        userService.updateUser(updatedUser);
-        return "redirect:/user";
-    }
-
     @GetMapping("/user/update")
     public String getUpdateProfilePage(Model model) {
         UserEntity user = userService.getCurrentUser();
         model.addAttribute("user", user);
         return "user_edit";
-    }*/
+    }
+
+    @PostMapping("/user/update")
+    public String updateUserProfile(@ModelAttribute UserEntity updatedUser) {
+        if (updatedUser.getId() == null) {
+            throw new IllegalArgumentException("User ID must not be null");
+        }
+        userService.updateUser(updatedUser);
+        return "redirect:/user";
+    }
 
 }
 
