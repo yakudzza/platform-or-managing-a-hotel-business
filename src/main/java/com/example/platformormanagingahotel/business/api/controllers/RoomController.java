@@ -33,15 +33,4 @@ public class RoomController {
         model.addAttribute("room", roomService.findRoomById(roomDto.getId()));
         return "room_info";
     }
-
-    @GetMapping("/add")
-    public String showAddRoomForm(@RequestParam("hotelId") Long id, Model model) {
-        model.addAttribute("hotelId", id);
-        return "add_room";
-    }
-    @PostMapping()
-    public String addRoom(RoomDto roomDto, @RequestParam("hotelId")Long id){
-        roomService.addRoom(roomDto, id);
-        return "redirect:/hotel/" + id;
-    }
 }

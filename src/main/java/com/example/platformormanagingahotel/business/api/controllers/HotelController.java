@@ -27,16 +27,4 @@ public class HotelController {
         model.addAttribute("images", hotelEntity.getImages());
         return "hotel_info";
     }
-
-    @GetMapping("/add")
-    public String addHotel(){
-        return "add_hotel";
-    }
-
-    @PostMapping
-    public String addHotel(HotelDto hotelDto, @RequestParam("image") MultipartFile file) throws IOException {
-        hotelService.addHotel(hotelDto, file);
-        return "redirect:/home";
-    }
-
 }
