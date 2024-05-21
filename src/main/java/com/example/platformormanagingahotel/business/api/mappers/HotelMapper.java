@@ -7,21 +7,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class HotelMapper {
 
-    public HotelEntity mapToHotel(HotelDto dto) {
-        HotelEntity entity = new HotelEntity();
-        entity.setName(dto.getName());
-        entity.setAddress(dto.getAddress());
-        entity.setBillingInfo(dto.getBillingInfo());
-        entity.setNumOfStars(dto.getNumOfStars());
-        return entity;
+    public HotelEntity mapToHotel(HotelDto hotelDto) {
+        HotelEntity hotel = new HotelEntity();
+        hotel.setName(hotelDto.getName());
+        hotel.setNumOfStars(hotelDto.getNumOfStars());
+        hotel.setAddress(hotelDto.getAddress());
+        hotel.setDescription(hotelDto.getDescription());
+        return hotel;
     }
 
     public HotelDto mapToHotelDto(HotelEntity entity) {
         HotelDto dto = new HotelDto();
-        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setAddress(entity.getAddress());
-        dto.setBillingInfo(entity.getBillingInfo());
+        dto.setDescription(entity.getBillingInfo());
         dto.setNumOfStars(entity.getNumOfStars());
         return dto;
     }

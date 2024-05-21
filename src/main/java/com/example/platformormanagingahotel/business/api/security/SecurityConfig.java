@@ -30,8 +30,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers( "/registration").permitAll();
                     registry.requestMatchers("/admin/**").hasRole("ADMIN");
-                    registry.requestMatchers("/user/**", "/home").hasRole("USER");
-                    registry.requestMatchers("/room").authenticated();
+                    registry.requestMatchers("/room/add").hasRole("ADMIN");
+                    registry.requestMatchers("/hotel/add").hasRole("ADMIN");
+                    registry.requestMatchers("/user/add").hasRole("ADMIN");
+                    registry.requestMatchers("/user/**", "/home","/room").authenticated();
                     registry.anyRequest().authenticated();
                 })
                 .formLogin(httpSecurityFormLoginConfigurer -> {

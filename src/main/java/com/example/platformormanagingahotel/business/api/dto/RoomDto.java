@@ -9,8 +9,12 @@ import lombok.*;
 @NoArgsConstructor
 public class RoomDto {
     Long id;
+    String name;
+    String description;
     String type;
     int floor;
+    int roomNum;
+    int cost;
     boolean isBooked;
     int price;
 }

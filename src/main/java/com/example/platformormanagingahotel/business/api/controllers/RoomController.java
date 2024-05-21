@@ -27,21 +27,10 @@ public class RoomController {
         model.addAttribute("room", roomService.findRoomById(id));
         return "room_info";
     }
-    @PutMapping("/book")
-    public String bookRoom(@RequestBody RoomDto roomDto, Model model){
-        roomService.bookRoom(roomDto);
+    @PostMapping("/book/{id}")
+    public String bookRoom(@PathVariable Long id, Model model){
+        RoomDto roomDto = roomService.bookRoom(id);
         model.addAttribute("room", roomService.findRoomById(roomDto.getId()));
         return "room_info";
-    }
-
-    @GetMapping("/add")
-    public String showAddRoomForm(@RequestParam("hotelId") Long id, Model model) {
-        model.addAttribute("hotelId", id);
-        return "add_room";
-    }
-    @PostMapping()
-    public String addRoom(RoomDto roomDto, @RequestParam("hotelId")Long id){
-        roomService.addRoom(roomDto, id);
-        return "redirect:/home";
     }
 }

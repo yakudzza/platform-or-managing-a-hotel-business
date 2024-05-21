@@ -3,56 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title th:text="${room.name}"></title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            background: linear-gradient(to right, #e3e3df, #b3a58b);
         }
         .container {
-            max-width: 800px;
-            margin: 20px auto;
+            display: flex;
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #f2f2f2;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
         }
-        h1 {
-            color: #007bff;
+        .sidebar a {
+            display: block;
+            color: #333;
+            text-decoration: none;
+            margin: 10px 0;
+            font-size: 18px;
         }
-        ul {
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            flex-grow: 1;
+            background-color: #b3a58b;
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+        .content h1, .content h2 {
+            margin-top: 0;
+        }
+        .details {
+            display: flex;
+            margin-top: 20px;
+        }
+        .details img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+        .info {
+            flex-grow: 1;
+        }
+        .info h3 {
+            margin-top: 20px;
+        }
+        .info ul {
             list-style: none;
             padding: 0;
         }
-        li {
-            margin-bottom: 10px;
+        .info ul li {
+            margin: 5px 0;
         }
-        .back-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container button {
+            background-color: #f5e3a1;
+            color: #333;
             border: none;
+            padding: 10px 20px;
+            font-size: 16px;
             border-radius: 5px;
-            text-decoration: none;
+            cursor: pointer;
         }
-        .back-button:hover {
-            background-color: #0056b3;
+        .button-container button:hover {
+            background-color: #d4c29c;
+        }
+        .navbar {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .card {
+            background-color: #a3926a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>Room Info</h1>
-    <ul>
-        <li><strong>Room Type: </strong> <span th:text="${room.type}"></span></li>
-        <li><strong>Room Floor: </strong> <span th:text="${room.floor}"></span></li>
-        <li><strong>Room Price: </strong> <span th:text="${room.price}"></span></li>
-        <li><strong>Is Room Booked: </strong> <span th:text="${room.isBooked}"></span></li>
-    </ul>
-    <a href="/room/book" class="back-button">Back</a>
+    <div class="sidebar">
+        <a href="/home">Home</a>
+        <a href="#">Hotels</a>
+        <a href="#">Packages</a>
+    </div>
+    <div class="content">
+        <div class="navbar">
+            <a href="#">Contact</a>
+            <a href="#">Login</a>
+        </div>
+        <h1><span th:text="${room.name}"></span></h1>
+        <div class="details">
+            <div class="images">
+                <tr th:each="image : ${images}">
+                    <img th:src="@{|/images/${image.id}|}" alt="Hotel Image">
+                </tr>
+            </div>
+            <div class="info">
+                <div class="card">
+                    <ul>
+                        <li><strong>Адрес:</strong> <span th:text="${room.type}"></span></li>
+                        <li><strong>Этаж</strong> <span th:text="${room.floor}"></span></li>
+                        <li><strong>Цена:</strong> <span th:text="${room.price}"></span></li>
+                    </ul>
+                    <div class="button-container">
+                        <form th:action="@{|/room/book/${room.id}|}" method="post">
+                            <button type="submit">Book</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

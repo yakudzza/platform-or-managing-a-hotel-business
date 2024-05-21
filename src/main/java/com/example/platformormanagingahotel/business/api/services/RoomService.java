@@ -39,13 +39,15 @@ public class RoomService {
         return (List<Room>) roomRepository.findAll();
     }
 
-    public RoomDto bookRoom(RoomDto roomDto){
+    public RoomDto bookRoom(Long id){
         UserEntity userEntity = userService.getCurrentUser();
-        Room room = new Room();
+        Room room = roomRepository.findById(id).get();
         room.setBooked(true);
         room.setUser(userEntity);
-        roomRepository.save(room);
-        return roomMapper.mapToRoomDto(roomRepository.findById(roomDto.getId()).get());
+        Room room1 = roomRepository.saveAndFlush(room);
+        userEntity.setRoom(room);
+        userService.saveUser(userEntity);
+        return roomMapper.mapToRoomDto(room1);
     }
 
     public RoomDto findRoomById(Long id){

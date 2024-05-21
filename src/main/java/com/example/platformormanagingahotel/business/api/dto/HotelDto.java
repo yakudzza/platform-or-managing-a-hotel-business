@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class HotelDto {
 
-    Long id;
     String name;
+    String description;
     int numOfStars;
     String address;
     String billingInfo;

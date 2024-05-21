@@ -177,14 +177,12 @@
     </div>
 
     <div class="rooms">
-        <div th:each="hotel : ${hotels}">
-            <div class="room" th:style="'background-image: url(/images/' + ${hotel.getPreviewImageId()} + ');'">
+        <div th:each="user : ${users_list}">
+            <div class="room">
                 <div class="room-info">
-                    <h3 th:text="${hotel.name}">СТАНДАРТ</h3>
-                    <p th:text="${hotel.description + ' места'}">4 места</p>
-                    <p th:text="${hotel.numOfStars + ' м²'}">25 м²</p>
-                    <p class="price" th:text="${hotel.billingInfo + ' р./ночь'}">8 600 р./ночь</p>
-                    <a th:href="'/hotel/' + ${hotel.id}" class="btn">Подробнее...</a>
+                    <h3 th:text="${user.id}"></h3>
+                    <p th:text="${user.email}"></p>
+                    <a th:href="'/user/' + ${user.id}" class="btn">Подробнее...</a>
                 </div>
             </div>
         </div>
