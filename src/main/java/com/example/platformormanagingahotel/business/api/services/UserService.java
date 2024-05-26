@@ -1,6 +1,7 @@
 package com.example.platformormanagingahotel.business.api.services;
 
 
+import com.example.platformormanagingahotel.business.api.entities.Image;
 import com.example.platformormanagingahotel.business.api.entities.Room;
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
 import com.example.platformormanagingahotel.business.api.exceptions.NotFoundException;
@@ -12,7 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +27,7 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ImageService imageService;
 
 
     public boolean createUser(UserEntity user){
@@ -63,7 +67,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void updateUser(UserEntity updatedUser) {
+    public void updateUser(UserEntity updatedUser, MultipartFile file) throws IOException {
         UserEntity existingUser = userRepository.findById(updatedUser.getId())
                 .orElseThrow(() -> new NotFoundException("Пользователь не существует"));
 
@@ -76,7 +80,12 @@ public class UserService {
         existingUser.setPassportSeries(updatedUser.getPassportSeries());
         existingUser.setPassportNumber(updatedUser.getPassportNumber());
         existingUser.setCitizenship(updatedUser.getCitizenship());
-
+        Image image;
+        if (file!= null) {
+            image = imageService.toImageEntity(file);
+            Image savedImage = imageService.saveImage(image);
+            existingUser.setImageId(savedImage.getId());
+        }
         userRepository.saveAndFlush(existingUser);
     }
 

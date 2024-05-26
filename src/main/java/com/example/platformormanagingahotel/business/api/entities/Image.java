@@ -28,6 +28,4 @@ public class Image {
     private boolean isPreviewImage;
     @Lob
     private byte[] bytes;
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    private HotelEntity hotel;
 }

@@ -119,9 +119,7 @@
         <h1><span th:text="${room.name}"></span></h1>
         <div class="details">
             <div class="images">
-                <tr th:each="image : ${images}">
-                    <img th:src="@{|/images/${image.id}|}" alt="Hotel Image">
-                </tr>
+                <img th:src="@{|/images/${room.getImageId()}|}"/>
             </div>
             <div class="info">
                 <div class="card">

@@ -26,10 +26,11 @@ public class HotelService {
 
     @Autowired
     HotelMapper hotelMapper;
+
     public List<HotelEntity> getAllHotels() {
 
         if (hotelRepository != null){
-            return (List<HotelEntity>) hotelRepository.findAll();
+            return hotelRepository.findAll();
         }
         else{
             return null;
@@ -50,10 +51,9 @@ public class HotelService {
         if (!file.isEmpty()) {
             image = imageService.toImageEntity(file);
             image.setPreviewImage(true);
-            hotelEntity.addImage(image);
+            Image savedImage = imageService.saveImage(image);
+            hotelEntity.setImageId(savedImage.getId());
         }
-        HotelEntity savedHotel = hotelRepository.save(hotelEntity);
-        savedHotel.setPreviewImageId(savedHotel.getImages().get(0).getId());
         hotelRepository.save(hotelEntity);
     }
     public List<Room> getRoomsByHotelId(Long id) {
@@ -63,5 +63,25 @@ public class HotelService {
             return optionalHotel.get().getRoom();
         }
         return Collections.emptyList();
+    }
+
+    public void editHotel(HotelDto hotelDto, MultipartFile file) throws IOException {
+        Optional<HotelEntity> optionalHotel = hotelRepository.findById(hotelDto.getId());
+        if (optionalHotel.isPresent()) {
+            HotelEntity hotelEntity = optionalHotel.get();
+            hotelEntity.setName(hotelDto.getName());
+            hotelEntity.setDescription(hotelDto.getDescription());
+            hotelEntity.setNumOfStars(hotelDto.getNumOfStars());
+            hotelEntity.setAddress(hotelDto.getAddress());
+            hotelEntity.setBillingInfo(hotelDto.getBillingInfo());
+
+            if (!file.isEmpty()) {
+                Image image = imageService.toImageEntity(file);
+            }
+
+            hotelRepository.saveAndFlush(hotelEntity);
+        } else {
+            throw new RuntimeException("Hotel not found");
+        }
     }
 }

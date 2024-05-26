@@ -33,7 +33,7 @@ public class SecurityConfig {
                     registry.requestMatchers("/room/add").hasRole("ADMIN");
                     registry.requestMatchers("/hotel/add").hasRole("ADMIN");
                     registry.requestMatchers("/user/add").hasRole("ADMIN");
-                    registry.requestMatchers("/user/**", "/home","/room").authenticated();
+                    registry.requestMatchers("/user/**", "/home","/room", "/hotel").authenticated();
                     registry.anyRequest().authenticated();
                 })
                 .formLogin(httpSecurityFormLoginConfigurer -> {

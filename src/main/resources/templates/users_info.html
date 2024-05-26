@@ -171,14 +171,12 @@
 
 <div class="main-content">
     <div class="hotel-info">
-        <h1>ГОСТИНИЦА «МОСКВА»</h1>
-        <p>ПРЕКРАСНОЕ МЕСТО ДЛЯ ОТДЫХА В САМОМ ЦЕНТРЕ ГОРОДА</p>
-        <p>площадь Александра Невского, 2</p>
+        <h1>СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h1>
     </div>
 
     <div class="rooms">
         <div th:each="user : ${users_list}">
-            <div class="room">
+            <div class="room" th:style="'background-image: url(/images/' + ${user.getImageId()} + ');'">
                 <div class="room-info">
                     <h3 th:text="${user.id}"></h3>
                     <p th:text="${user.email}"></p>

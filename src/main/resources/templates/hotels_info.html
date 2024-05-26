@@ -171,20 +171,19 @@
 
 <div class="main-content">
     <div class="hotel-info">
-        <h1>ГОСТИНИЦА «МОСКВА»</h1>
-        <p>ПРЕКРАСНОЕ МЕСТО ДЛЯ ОТДЫХА В САМОМ ЦЕНТРЕ ГОРОДА</p>
-        <p>площадь Александра Невского, 2</p>
+        <h1>Добро пожаловать в Санкт-Петербург</h1>
     </div>
 
     <div class="rooms">
-        <div th:each="hotel : ${hotels}">
-            <div class="room" th:style="'background-image: url(/images/' + ${hotel.getPreviewImageId()} + ');'">
+        <div th:each="hotel : ${hotels_list}">
+            <div class="room" th:style="'background-image: url(/images/' + ${hotel.getImageId()} + ');'">
                 <div class="room-info">
-                    <h3 th:text="${hotel.name}">СТАНДАРТ</h3>
-                    <p th:text="${hotel.description + ' места'}">4 места</p>
-                    <p th:text="${hotel.numOfStars + ' м²'}">25 м²</p>
-                    <p class="price" th:text="${hotel.billingInfo + ' р./ночь'}">8 600 р./ночь</p>
-                    <a th:href="'/hotel/' + ${hotel.id}" class="btn">Подробнее...</a>
+                    <h3 th:text="${hotel.name}"></h3>
+                    <p th:text="${hotel.description + ' места'}"></p>
+                    <p th:text="${hotel.numOfStars + ' / 5'}">²</p>
+                    <p class="price" th:text="${hotel.address}"></p>
+                    <a th:href="@{|/admin/hotel/edit/${hotel.id}|}" class="btn">Edit</a>
+                    <a th:href="@{|/hotel/${hotel.id}|}" class="btn">Show more</a>
                 </div>
             </div>
         </div>

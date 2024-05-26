@@ -8,7 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Controller
@@ -68,11 +70,11 @@ public class UserController {
     }
 
     @PostMapping("/user/update")
-    public String updateUserProfile(@ModelAttribute UserEntity updatedUser) {
+    public String updateUserProfile(@ModelAttribute UserEntity updatedUser, @RequestParam("image") MultipartFile image) throws IOException {
         if (updatedUser.getId() == null) {
             throw new IllegalArgumentException("User ID must not be null");
         }
-        userService.updateUser(updatedUser);
+        userService.updateUser(updatedUser, image);
         return "redirect:/user";
     }
 

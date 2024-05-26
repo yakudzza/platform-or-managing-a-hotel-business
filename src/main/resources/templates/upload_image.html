@@ -36,18 +36,8 @@
 </head>
 <body>
 <div class="container">
-    <h1>Добавить свой отель</h1>
-    <p>Добро пожаловать страницу добавления своего отеля!</p>
-    <p>Заполните форму ниже, чтобы добавить свой отель в систему:</p>
-    <form action="/hotel" method="post" enctype="multipart/form-data">
-        <label>Name:</label>
-        <input id="name" name="name" required type="text"><br>
-        <label>NumOfStars:</label>
-        <input id="numOfStars" name="numOfStars" required type="number"><br>
-        <label>Address:</label>
-        <input id="address" name="address" required type="text"><br>
-        <label>BillingInfo:</label>
-        <input id="description" name="description" required type="text"><br>
+    <h1>Загрузить свою фотографию</h1>
+    <form action="/admin/image/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="image"><br>
         <button type="submit" class="btn">Add</button>
     </form>
