@@ -41,14 +41,14 @@
     <p>Заполните форму ниже, чтобы добавить свой отель в систему:</p>
     <form action="/hotel" method="post" enctype="multipart/form-data">
         <label>Name:</label>
-        <input id="name" name="name" required type="text"><br>
+        <input id="name" name="name" required type="text" th:value="${hotel.name}"><br>
         <label>NumOfStars:</label>
-        <input id="numOfStars" name="numOfStars" required type="number"><br>
+        <input id="numOfStars" name="numOfStars" required type="number" th:value="${hotel.numOfStars}"><br>
         <label>Address:</label>
-        <input id="address" name="address" required type="text"><br>
+        <input id="address" name="address" required type="text" th:value="${hotel.address}"><br>
         <label>BillingInfo:</label>
-        <input id="description" name="description" required type="text"><br>
-        <input type="file" name="image"><br>
+        <input id="description" name="description" required type="text" th:value="${hotel.billingInfo}"><br>
+        <input type="file" name="image" required><br>
         <button type="submit" class="btn">Add</button>
     </form>
 </div>

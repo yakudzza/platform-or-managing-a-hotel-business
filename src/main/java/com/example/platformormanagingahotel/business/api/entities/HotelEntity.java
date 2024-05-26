@@ -35,14 +35,7 @@ public class HotelEntity {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "hotel")
     List<Room> room;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hotel", fetch = FetchType.EAGER)
-    List<Image> images = new ArrayList<>();
+    Long imageId;
 
-    Long previewImageId;
-
-    public void addImage(Image image) {
-        images.add(image);
-        image.setHotel(this);
-    }
 }
 

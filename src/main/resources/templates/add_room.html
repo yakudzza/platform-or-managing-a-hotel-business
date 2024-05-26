@@ -37,7 +37,7 @@
 <body>
 <div class="container">
     <h1>Добавить номер</h1>
-    <form action="/room" method="post">
+    <form action="/room" method="post" enctype="multipart/form-data"    >
         <label>Type:</label>
         <input id="type" name="type" required type="text"><br>
         <label>Floor:</label>
@@ -46,6 +46,7 @@
         <input id="isBooked" name="isBooked" type="checkbox"><br>
         <label>Price:</label>
         <input id="price" name="price" type="number"><br>
+        <input type="file" name="image"><br>
         <input type="hidden" name="hotelId" th:value="${hotelId}">
         <button type="submit" class="btn">Add</button>
     </form>

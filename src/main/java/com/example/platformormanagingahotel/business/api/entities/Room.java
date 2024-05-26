@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @Entity
@@ -29,5 +32,6 @@ public class Room {
     UserEntity user;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     HotelEntity hotel;
+    Long imageId;
 }
 

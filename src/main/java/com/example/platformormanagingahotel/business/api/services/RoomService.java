@@ -1,13 +1,17 @@
 package com.example.platformormanagingahotel.business.api.services;
 
 import com.example.platformormanagingahotel.business.api.dto.RoomDto;
+import com.example.platformormanagingahotel.business.api.entities.HotelEntity;
+import com.example.platformormanagingahotel.business.api.entities.Image;
 import com.example.platformormanagingahotel.business.api.entities.Room;
 import com.example.platformormanagingahotel.business.api.entities.UserEntity;
 import com.example.platformormanagingahotel.business.api.mappers.RoomMapper;
 import com.example.platformormanagingahotel.business.api.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +30,26 @@ public class RoomService {
     @Autowired
     UserService userService;
 
+    ImageService imageService;
 
-    public RoomDto addRoom(RoomDto roomDto, Long id){
+    @Autowired
+    RoomService(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
+
+    public RoomDto addRoom(RoomDto roomDto, Long id, MultipartFile file) throws IOException {
         Room room = roomMapper.mapToRoom(roomDto);
         room.setHotel(hotelService.getHotelById(id));
+        Image image;
+        if (!file.isEmpty()) {
+            image = imageService.toImageEntity(file);
+            image.setPreviewImage(true);
+            Image savedImage = imageService.saveImage(image);
+            room.setImageId(savedImage.getId());
+        }
         roomRepository.save(room);
-        return roomDto;
+        return roomMapper.mapToRoomDto(room);
     }
 
     public List<Room> listRooms(){
@@ -50,13 +67,8 @@ public class RoomService {
         return roomMapper.mapToRoomDto(room1);
     }
 
-    public RoomDto findRoomById(Long id){
+    public Room findRoomById(Long id){
         Optional<Room> room = roomRepository.findById(id);
-        if (room.isPresent()){
-            return roomMapper.mapToRoomDto(room.get());
-        }
-        else {
-            return null;
-        }
+        return room.orElse(null);
     }
 }

@@ -53,4 +53,5 @@ public class UserEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Room room;
+    Long imageId;
 }
