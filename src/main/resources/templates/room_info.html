@@ -3,140 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${room.name}"></title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #e3e3df, #b3a58b);
+        html {
+            height: 100%;
+            background-image: linear-gradient(to bottom, #5F5435, #AD995F);
+            backdrop-filter: blur(20px);
         }
-        .container {
-            display: flex;
+
+        nav {
+            position: absolute;
+            width: 334px;
+            height: 964px;
+            left: 0px;
+            top: 0px;
+            margin: 0px;
+            background: rgba(255, 255, 255, 0.6);
         }
-        .sidebar {
-            width: 200px;
-            background-color: #f2f2f2;
-            padding: 20px;
+
+        nav h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 38px;
+            font-weight: 500;
+            margin-top: 170px;
+            margin-left: 50px;
+            color: #ffffff;
         }
-        .sidebar a {
-            display: block;
-            color: #333;
+
+        a {
             text-decoration: none;
-            margin: 10px 0;
-            font-size: 18px;
+            color: #ffffff;
         }
-        .sidebar a:hover {
-            text-decoration: underline;
+
+        nav ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 500;
+            padding-top: 20px;
+            padding-left: 85px;
+            color: #ffffff;
         }
-        .content {
-            flex-grow: 1;
-            background-color: #b3a58b;
-            padding: 20px;
-            color: white;
+
+        nav ul li {
+            margin-bottom: 60px;
+        }
+
+        nav ul li ul {
+            float: left;
+            position: absolute;
+            display: none;
+            list-style: none;
+        }
+
+        nav ul li:hover > ul{
+            display: inherit;
+        }
+
+        nav ul li ul li {
+            margin-top: -58px;
+            margin-left: 50px;
+            height: auto;
+            width: auto;
+            padding: 10px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        nav ul li ul li:hover {
+            background-color: #3f3f3f33;
+            transform: scale(1.09);
+        }
+
+        header {
+            text-align: right;
+        }
+
+        header section div {
+            display: inline-block;
+            margin-right: 40px;
+            margin-top: 25px;
+        }
+
+        header img {
+            float: right;
+            margin: 23px 0px 0px 0px;
+        }
+
+        header ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+            width: 400px;
+            color: #ffffff;
+            list-style-type: none;
+        }
+
+        header ul ul {
+            position: absolute;
+            display: none;
+            text-align: left;
+            margin-left: -26px;
+        }
+
+        header ul ul li {
+            display: list-item;
+            float: none;
             position: relative;
         }
-        .content h1, .content h2 {
-            margin-top: 0;
+
+        header ul li ul li {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px 0px;
+            width: auto;
+            transition: 0.2s;
         }
-        .details {
+
+        header ul li:hover > ul {
+            display: inherit;
+        }
+
+        header ul li ul li:hover {
+            background-color: #ffffffdc;
+            color: #000000;
+            transform: scale(1.08);
+        }
+
+        #login {
+            border-radius: 25px;
+            border: 2px solid #ffffff;
+            height: 60px;
+            width: 200px;
+            text-align: center;
+        }
+
+        #login img {
+            float: left;
+            margin: 15px 0px 0px 40px;
+        }
+
+        #login p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 23px;
+            font-weight: 600;
+            text-align: center;
+            width: 170px;
+            margin: 16px 0px;
+            color: #ffffff;
+        }
+
+        #head {
             display: flex;
-            margin-top: 20px;
+            font-family: "Montserrat", sans-serif;
+            margin: 30px 0px 0px 400px;
         }
-        .details img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-right: 20px;
+
+        #head h1 {
+            font-size: 35px;
+            font-weight: 600;
+            color: #ffffff;
         }
-        .info {
-            flex-grow: 1;
+
+        #head h2 {
+            margin-top: 30px;
+            font-size: 35px;
+            font-weight: 400;
+            color: #ffffff;
         }
-        .info h3 {
-            margin-top: 20px;
+
+        #head img {
+            float: left;
+            margin: 30px 40px 0px 30px;
         }
-        .info ul {
-            list-style: none;
-            padding: 0;
+
+        #main_info article {
+            display: inline-block;
         }
-        .info ul li {
-            margin: 5px 0;
+
+        #photos {
+            font-family: "Montserrat", sans-serif;
         }
-        .button-container {
-            margin-top: 20px;
+
+        #photos img {
+            margin: 20px 40px 30px 400px;
         }
-        .button-container button {
-            background-color: #f5e3a1;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
+
+        #price {
+            position: absolute;
+            font-family: "Montserrat", sans-serif;
+            margin: -15px 0px 0px 25px;
         }
-        .button-container button:hover {
-            background-color: #d4c29c;
+
+        #price div {
+            display: inline-block;
+            float: right;
+            margin: -30px 20px 0px 340px;
+            font-weight: 500;
+            font-size: 30px;
+            padding: 19px 30px;
+            border-radius: 25px;
+            background-color: #FFEEBF;
+            color: #544A2E;
         }
-        .navbar {
-            text-align: right;
-            margin-bottom: 20px;
+
+        #price a {
+            color: #544A2E;
         }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 10px;
-            font-size: 16px;
+
+        #price h1 {
+            font-size: 35px;
+            font-weight: 400;
+            color: #ffffff;
         }
-        .navbar a:hover {
-            text-decoration: underline;
+
+        #description {
+            position: absolute;
+            margin: 70px 70px 0px 30px;
+            width: fit-content;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 350;
+            font-size: 21px;
+            color: #ffffff;
         }
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 0;
+
+        .facilities ul {
+            margin-top: 5px;
         }
-        .card {
-            background-color: #a3926a;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .facilities section {
+            display: inline-block;
         }
+
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <title>Saint-P Tourment</title>
 </head>
 <body>
-<div class="container">
-    <div class="sidebar">
-        <a href="/home">Home</a>
-        <a href="#">Hotels</a>
-        <a href="#">Packages</a>
-    </div>
-    <div class="content">
-        <div class="navbar">
-            <a href="#">Contact</a>
-            <a href="#">Login</a>
-        </div>
-        <h1><span th:text="${room.name}"></span></h1>
-        <div class="details">
-            <div class="images">
-                <img th:src="@{|/images/${room.getImageId()}|}"/>
-            </div>
-            <div class="info">
-                <div class="card">
+<nav>
+    <h1>Навигация</h1>
+    <ul>
+        <a href="/home">
+            <li>Главная</li>
+        </a>
+        <a href="/user">
+            <li>Профиль</li>
+        </a>
+    </ul>
+</nav>
+<header>
+    <section>
+        <div>
+            <ul>
+                <li>Контактная информация
                     <ul>
-                        <li><strong>Адрес:</strong> <span th:text="${room.type}"></span></li>
-                        <li><strong>Этаж</strong> <span th:text="${room.floor}"></span></li>
-                        <li><strong>Цена:</strong> <span th:text="${room.price}"></span></li>
+                        <li>Телефон: + 7 (952) 111-33-22</li>
+                        <li>Почта: saint-p@spb.ru</li>
                     </ul>
-                    <div class="button-container">
-                        <form th:action="@{|/room/book/${room.id}|}" method="post">
-                            <button type="submit">Book</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
-    </div>
-</div>
+        <div id="login">
+            <a href="login.html">
+                <p>Login</p>
+            </a>
+        </div>
+    </section>
+</header>
+<section id="head">
+    <h1 th:text="НОМЕР + | | + ${room.type} + | |">НОМЕР "КОМФОРТ"</h1>
+    <h2><a th:href="${room.getHotel().getName()}">ГОС. "МОСКВА"</a></h2>
+</section>
+<section id="main_info">
+    <article id="photos">
+        <img th:src="@{|/images/${room.getImageId()}|}">
+    </article>
+    <article id="price">
+        <h1 th:text="ЦЕНА + |: | + ${room.price} + | руб/ночь|"></h1>
+        <div><a th:href="@{|/room/book/${room.id}|}">БРОНИРОВАТЬ</a></div>
+    </article>
+    <article id="description">
+        <p th:text="${room.description}">Двухкомнатный номер. В гостиной диван, два кресла, письменный и журнальный столы. В спальне двуспальная кровать. Из окон открывается вид на набережную Невы. Во всех номерах отеля: сейф, кондиционер, телевизор, телефон, холодильник, туалетные принадлежности. В этом номере: второй телевизор, биде, письменные принадлежности, халат, тапочки, улучшенный завтрак, постельное белье лучшего качества, фен, чайник, чай, сахар, зонт-трость. 3й гость размещается на диване.</p>
+    </article>
+</section>
 </body>
 </html>
