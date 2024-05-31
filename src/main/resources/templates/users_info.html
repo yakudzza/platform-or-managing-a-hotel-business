@@ -1,191 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Домашняя страница</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
+        nav {
+            position: absolute;
+            width: 334px;
+            height: 964px;
+            left: 0px;
+            top: 0px;
+            margin: 0px;
+            background: rgba(255, 255, 255, 0.6);
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #3b3a30;
-            padding: 10px 20px;
+        nav h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 38px;
+            font-weight: 500;
+            margin-top: 170px;
+            margin-left: 50px;
+            color: #ffffff;
         }
 
-        .navbar a {
-            color: #fff;
+        a {
             text-decoration: none;
-            margin: 0 10px;
+            color: #ffffff;
         }
 
-        .navbar a:hover {
-            text-decoration: underline;
+        nav ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 500;
+            padding-top: 20px;
+            padding-left: 85px;
+            color: #ffffff;
         }
 
-        .sidebar {
-            width: 200px;
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-right: 1px solid #ccc;
-            position: fixed;
-            top: 0;
-            bottom: 0;
+        nav ul li {
+            margin-bottom: 60px;
         }
 
-        .sidebar h2 {
-            font-size: 18px;
-            margin-bottom: 20px;
+        nav ul li ul {
+            float: left;
+            position: absolute;
+            display: none;
+            list-style: none;
         }
 
-        .sidebar ul {
+        nav ul li:hover > ul{
+            display: inherit;
+        }
+
+        nav ul li ul li {
+            margin-top: -58px;
+            margin-left: 50px;
+            height: auto;
+            width: auto;
+            padding: 10px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        nav ul li ul li:hover {
+            background-color: #3f3f3f33;
+            transform: scale(1.09);
+        }
+
+        header {
+            text-align: right;
+        }
+
+        header section div {
+            display: inline-block;
+            margin-right: 40px;
+            margin-top: 25px;
+        }
+
+        header img {
+            float: right;
+            margin: 23px 0px 0px 0px;
+        }
+
+        header ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+            width: 400px;
+            color: #ffffff;
             list-style-type: none;
-            padding: 0;
         }
 
-        .sidebar ul li {
+        header ul ul {
+            position: absolute;
+            display: none;
+            text-align: left;
+            margin-left: -26px;
+        }
+
+        header ul ul li {
+            display: list-item;
+            float: none;
+            position: relative;
+        }
+
+        header ul li ul li {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px 0px;
+            width: auto;
+            transition: 0.2s;
+        }
+
+        header ul li:hover > ul {
+            display: inherit;
+        }
+
+        header ul li ul li:hover {
+            background-color: #ffffffdc;
+            color: #000000;
+            transform: scale(1.08);
+        }
+
+        #login {
+            border-radius: 25px;
+            border: 2px solid #ffffff;
+            height: 60px;
+            width: 200px;
+            text-align: center;
+        }
+
+        #login img {
+            float: left;
+            margin: 15px 0px 0px 40px;
+        }
+
+        #login p    {
+            font-family: "Montserrat", sans-serif;
+            font-size: 23px;
+            font-weight: 600;
+            text-align: center;
+            width: 170px;
+            margin: 16px 0px;
+            color: #ffffff;
+        }
+
+        #info {
+            text-align: right;
+        }
+
+        #info > h1 {
+            font-family: "Montserrat", sans-serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 40px;
+            margin-right: 308px;
+            margin-top: 40px;
+            color: #ffffff;
+        }
+
+        #first {
+            display: inline-block;
+        }
+
+
+        #first h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            font-style: normal;
+            text-align: left;
+            margin-top: 28px;
+            margin-bottom: 0px;
+            margin-left: 25px;
+            color: #000000;
+        }
+
+        #first h2 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            background-color: #ffffff;
+            text-align: right;
+            width: fit-content;
+            height: fit-content;
+            padding: 5px 10px;
+            margin-left: auto;
+            margin-right: 20px;
+            margin-top: 40px;
             margin-bottom: 10px;
         }
 
-        .sidebar ul li a {
-            color: #333;
-            text-decoration: none;
-        }
-
-        .sidebar ul li a:hover {
-            text-decoration: underline;
-        }
-
-        .main-content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-
-        .hotel-info {
-            background-color: #d4af37;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-        }
-
-        .hotel-info h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #fff;
-        }
-
-        .hotel-info p {
-            margin: 10px 0 0;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .rooms {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .room {
-            position: relative;
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            width: 100%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-size: cover;
-            background-position: center;
-            height: 250px; /* Высота блока номера */
-            display: flex;
-            align-items: flex-end; /* Выравнивание текста по низу */
-        }
-
-        .room-info {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон для текста */
-            color: #fff;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .room-info h3 {
-            margin: 0;
+        #first h3 {
+            font-family: "Montserrat", sans-serif;
             font-size: 18px;
+            font-weight: 400;
+            background-color: #ffffff00;
+            text-align: center;
+            width: fit-content;
+            height: fit-content;
+            margin-left: auto;
+            margin-right: 20px;
+            margin-top: 0px;
+            border: #ffffff solid 2px;
         }
 
-        .room-info p {
-            margin: 5px 0;
-            font-size: 14px;
+        .hotel {
+            width: 290px;
+            height: 240px;
+            border-radius: 25px;
+            float: left;
+            margin-right: 160px;
+            margin-top: 40px;
+            background-color: #a3926a;
         }
 
-        .room-info .price {
-            font-weight: bold;
-            margin: 10px 0;
+        .hotel h1  {
+            font-family: "Montserrat", sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            width: fit-content;
+            height: fit-content;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
 
-        .room-info .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
+        .hotel p {
+            text-align: left;
+            margin-left: 25px;
+            margin-top: 5px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 11px;
+            font-weight: 500;
         }
-
-        .room-info .btn:hover {
-            background-color: #0056b3;
-        }
-
     </style>
 </head>
-<body>
-
-<div class="navbar">
-    <div>
-        <a href="#">Контактная информация</a>
-    </div>
-    <div>
-        <a href="#">Login</a>
-    </div>
-</div>
-
-<div class="sidebar">
-    <h2>Навигация</h2>
+<body th:style="'background-image: url(/images/name/' + background-body.png + '); background-position: 50% 10%; background-repeat: no-repeat; background-size: 150%;'">
+<nav>
+    <h1>Навигация</h1>
     <ul>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Отели</a></li>
-        <li><a href="#">Путевки</a></li>
-        <li><a href="/user">Профиль</a></li>
-        <li><a href="hotel/add">Добавить Отель</a></li>
+        <a href="/admin/home">
+            <li>Главная</li>
+        </a>
+        <a href="/admin/hotels">
+            <li>Отели</li>
+        </a>
+        <a href="/admin/hotel/add">
+            <li>Добавить отель</li>
+        </a>
+        <a href="/user">
+            <li>Профиль</li>
+        </a>
 
     </ul>
-</div>
-
-<div class="main-content">
-    <div class="hotel-info">
-        <h1>СПИСОК ПОЛЬЗОВАТЕЛЕЙ</h1>
-    </div>
-
-    <div class="rooms">
-        <div th:each="user : ${users_list}">
-            <div class="room" th:style="'background-image: url(/images/' + ${user.getImageId()} + ');'">
-                <div class="room-info">
-                    <h3 th:text="${user.id}"></h3>
-                    <p th:text="${user.email}"></p>
-                    <a th:href="'/user/' + ${user.id}" class="btn">Подробнее...</a>
-                </div>
-            </div>
+</nav>
+<header>
+    <section>
+        <div>
+            <ul>
+                <li>Контактная информация
+                    <ul>
+                        <li>Телефон: + 7 (952) 111-33-22</li>
+                        <li>Почта: saint-p@spb.ru</li>
+                    </ul>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+        <div id="login">
+            <a href="/login">
+                <p>Login</p>
+            </a>
+        </div>
+    </section>
+</header>
+<section id="info">
+    <h1>Список пользователей, зарегистрированных в системе</h1>
+    <div id="first" th:each="user : ${users_list}">
+        <div class="hotel" th:style="'background-image: url(/images/' + ${user.getImageId()} + '); background-size: cover; '">
+            <h1 th:text="${user.email}"></h1>
+            <a th:href="@{|/user/${user.id}|}" class="btn"><h3>ПОДРОБНЕЕ...</h3></a>
         </div>
     </div>
-</div>
-
+</section>
 </body>
 </html>

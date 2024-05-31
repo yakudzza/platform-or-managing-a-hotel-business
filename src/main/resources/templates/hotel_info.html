@@ -3,159 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${hotel.name}"></title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #e3e3df, #b3a58b);
+        html {
+            height: 100%;
+            background-image: linear-gradient(to bottom, #5F5435, #AD995F);
+            backdrop-filter: blur(20px);
         }
-        .container {
-            display: flex;
+
+        nav {
+            position: absolute;
+            width: 334px;
+            height: 964px;
+            left: 0px;
+            top: 0px;
+            margin: 0px;
+            background: rgba(255, 255, 255, 0.6);
         }
-        .sidebar {
-            width: 200px;
-            background-color: #f2f2f2;
-            padding: 20px;
+
+        nav h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 38px;
+            font-weight: 500;
+            margin-top: 170px;
+            margin-left: 50px;
+            color: #ffffff;
         }
-        .sidebar a {
-            display: block;
-            color: #333;
+
+        a {
             text-decoration: none;
-            margin: 10px 0;
-            font-size: 18px;
+            color: #ffffff;
         }
-        .sidebar a:hover {
-            text-decoration: underline;
+
+        nav ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 500;
+            padding-top: 20px;
+            padding-left: 85px;
+            color: #ffffff;
         }
-        .content {
-            flex-grow: 1;
-            background-color: #b3a58b;
-            padding: 20px;
-            color: white;
+
+        nav ul li {
+            margin-bottom: 60px;
+        }
+
+        nav ul li ul {
+            float: left;
+            position: absolute;
+            display: none;
+            list-style: none;
+        }
+
+        nav ul li:hover > ul{
+            display: inherit;
+        }
+
+        nav ul li ul li {
+            margin-top: -58px;
+            margin-left: 50px;
+            height: auto;
+            width: auto;
+            padding: 10px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        nav ul li ul li:hover {
+            background-color: #3f3f3f33;
+            transform: scale(1.2);
+        }
+
+        header {
+            text-align: right;
+        }
+
+        header section div {
+            display: inline-block;
+            margin-right: 40px;
+            margin-top: 25px;
+        }
+
+        header img {
+            float: right;
+            margin: 23px 0px 0px 0px;
+        }
+
+        header ul {
+            font-family: "Montserrat", sans-serif;
+            font-size: 25px;
+            font-weight: 600;
+            text-align: center;
+            width: 400px;
+            color: #ffffff;
+            list-style-type: none;
+        }
+
+        header ul ul {
+            position: absolute;
+            display: none;
+            text-align: left;
+            margin-left: -26px;
+        }
+
+        header ul ul li {
+            display: list-item;
+            float: none;
             position: relative;
         }
-        .content h1, .content h2 {
-            margin-top: 0;
+
+        header ul li ul li {
+            text-align: center;
+            margin-top: 10px;
+            padding: 10px 0px;
+            width: auto;
+            transition: 0.2s;
         }
-        .details {
-            display: flex;
+
+        header ul li:hover > ul {
+            display: inherit;
+        }
+
+        header ul li ul li:hover {
+            background-color: #ffffffdc;
+            color: #000000;
+            transform: scale(1.08);
+        }
+
+        #login {
+            border-radius: 25px;
+            border: 2px solid #ffffff;
+            height: 60px;
+            width: 200px;
+            text-align: center;
+        }
+
+        #login img {
+            float: left;
+            margin: 15px 0px 0px 40px;
+        }
+
+        #login p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 23px;
+            font-weight: 600;
+            text-align: center;
+            width: 170px;
+            margin: 16px 0px;
+            color: #ffffff;
+        }
+
+        #first {
+            width: 1400px;
+            height: 240px;
+            border-radius: 25px;
+            float: left;
+            margin: 80px 400px 40px 400px;
+        }
+
+        #first h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            font-style: normal;
+            text-align: left;
+            margin-top: 35px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+        #first h2 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+
+        #fiveth h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            font-style: normal;
+            text-align: left;
+            margin-top: 35px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+        #fiveth h2 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+        #nineth h1 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            font-style: normal;
+            text-align: left;
+            margin-top: 35px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+        #nineth h2 {
+            font-family: "Montserrat", sans-serif;
+            font-size: 20px;
+            font-weight: 500;
+            font-style: normal;
+            text-align: left;
+            margin-top: 10px;
+            margin-bottom: 0px;
+            margin-left: 40px;
+            color: #000000;
+        }
+
+        p {
+            text-align: left;
+            margin-left: 40px;
             margin-top: 20px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 15px;
+            font-weight: 500;
         }
-        .details img {
+
+        .row {
+            margin-left: 400px;
+            display: inline-block;
+        }
+
+        .row a {
+            color: #000000;
+        }
+
+        .row section {
+            height: 290px;
             width: 300px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-right: 20px;
+            border-radius: 25px;
+            float: left;
+            margin: 40px 0px 0px 125px;
+            background-color: #ffffff;
         }
-        .info {
-            flex-grow: 1;
+
+        #second {
+            font-family: "Montserrat", sans-serif;
         }
-        .info h3 {
-            margin-top: 20px;
+
+        .row h1 {
+            font-size: 28px;
+            font-weight: 600;
+            font-style: normal;
+            text-align: left;
+            margin-top: 40px;
+            margin-bottom: 0px;
+            margin-left: 25px;
+            color: #000000;
         }
-        .info ul {
-            list-style: none;
-            padding: 0;
-        }
-        .info ul li {
-            margin: 5px 0;
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        .button-container button {
-            background-color: #f5e3a1;
-            color: #333;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .button-container button:hover {
-            background-color: #d4c29c;
-        }
-        .navbar {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
+
+        .row ul {
+            text-align: left;
             margin-left: 10px;
-            font-size: 16px;
+            margin-top: 20px;
+            font-size: 15px;
+            font-weight: 400;
         }
-        .navbar a:hover {
-            text-decoration: underline;
+
+        .row h2 {
+            font-size: 18px;
+            font-weight: 700;
+            background-color: #ffffff;
+            text-align: center;
+            width: 153px;
+            height: fit-content;
+            margin-left: 25px;
+            margin-top: 20px;
+            padding: 8px 15px;
         }
-        .card {
+
+        .row h3 {
+            font-size: 18px;
+            font-weight: 600;
+            background-color: #ffffff;
+            text-align: center;
+            width: fit-content;
+            height: fit-content;
+            margin-left: 25px;
+            margin-top: 5px;
+            padding: 8px 30px;
+        }
+        button {
+            padding: 10px 20px;
             background-color: #a3926a;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer
+        }
+        button:hover {
+            background-color: #AD995F;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <title>Saint-P Tourment</title>
 </head>
 <body>
-<div class="container">
-    <div class="sidebar">
-        <a href="/home">Home</a>
-        <a href="#">Hotels</a>
-        <a href="#">Packages</a>
-    </div>
-    <div class="content">
-        <div class="navbar">
-            <a href="#">Contact</a>
-            <a href="#">Login</a>
-        </div>
-        <h1><span th:text="${hotel.name}">Hotel Name</span></h1>
-        <div class="details">
-            <div class="images">
-                <tr th:each="image : ${images}">
-                    <img th:src="@{|/images/${image.id}|}" alt="Hotel Image">
-                </tr>
-            </div>
-            <div class="info">
-                <div class="card">
+<nav>
+    <h1>Навигация</h1>
+    <ul>
+        <a href="/home">
+            <li>Главная</li>
+        </a>
+        <a href="/user">
+            <li>Профиль</li>
+        </a>
+    </ul>
+</nav>
+<header>
+    <section>
+        <div>
+            <ul>
+                <li>Контактная информация
                     <ul>
-                        <li><strong>Адрес:</strong> <span th:text="${hotel.address}">Hotel Address</span></li>
-                        <li><strong></strong> <span th:text="${hotel.description}">Hotel Phone</span></li>
-                        <li><strong>Рейтинг:</strong> <span th:text="${hotel.numOfStars}">Hotel Stars</span>/5</li>
+                        <li>Телефон: + 7 (952) 111-33-22</li>
+                        <li>Почта: saint-p@spb.ru</li>
                     </ul>
-                    <div class="button-container">
-                        <form action="/room/add" method="get">
-                            <input type="hidden" name="hotelId" th:value="${hotel.id}" />
-                            <button type="submit">Add Room</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
-        <table th:if="${not #lists.isEmpty(rooms)}">
-            <thead>
-            <tr>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="room : ${rooms}">
-                <td th:text="${room.type}">Room Type</td>
-                <td th:text="${room.price}">Room Price</td>
-                <td>
-                    <form th:action="@{'/room/' + ${room.id}}" method="get">
-                        <input type="hidden" name="id" th:value="${room.id}" />
-                        <button type="submit">More Info</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+        <div id="login">
+            <a href="/login">
+                <p>Login</p>
+            </a>
+        </div>
+    </section>
+</header>
+<section>
+    <article id="first" th:style="'background-image: url(/images/' + ${hotel.getImageId()} + '); background-size: cover; '">
+        <h1 th:text="${hotel.name}">ГОСТИНИЦА "МОСКВА"</h1>
+        <h2 th:text="${hotel.description}">ПРЕКРАСНОЕ МЕСТО ДЛЯ ОТДЫХА В САМОМ ЦЕНТРЕ ГОРОДА</h2>
+        <p th:text="${hotel.address}">площадь Александра Невского, 2</p>
+        <form method="get" action="/room/add">
+            <input type="hidden" name="hotelId" th:value="${hotel.id}">
+            <button type="submit">Добавить номер</button>
+        </form>
+    </article>
+    <article class="row">
+        <section id="second" th:each="room : ${rooms}" th:style="'background-image: url(/images/' + ${room.getImageId()} + '); background-size: cover; '">
+            <h1 th:text="${room.type}"></h1>
+            <ul>
+                <li th:text="${room.description}">4 места</li>
+            </ul>
+            <h2 th:text="${room.price}">8 600р./ночь</h2>
+            <h3><a th:href="@{|/room/${room.id}|}">Подробнее...</a></h3>
+        </section>
+    </article>
+</section>
 </body>
 </html>

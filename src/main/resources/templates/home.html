@@ -206,6 +206,15 @@
             border: #ffffff solid 2px;
         }
 
+        .hotel {
+            width: 290px;
+            height: 240px;
+            border-radius: 25px;
+            float: left;
+            margin-right: 160px;
+            margin-top: 40px;
+            background-color: #ffffff;
+        }
 
         .hotel p {
             text-align: left;
@@ -251,12 +260,9 @@
         <a href="/home">
             <li>Главная</li>
         </a>
-        <li>Отели
-            <ul th:each="hotel : ${hotels}">
-                <li><a th:href="@{|/hotel/${hotel.id}|}" th:text="${hotel.name}"></a></li>
-            </ul>
-        </li>
-
+        <a href="/user">
+            <li>Профиль</li>
+        </a>
     </ul>
 </nav>
 <header>
@@ -281,15 +287,15 @@
     </section>
 </header>
 <section id="info">
-    <h1>ДОБРО ПОЖАЛОВАТЬ В САНКТ-ПЕТЕРБУРГ</h1>
-        <div id="first" th:each="hotel : ${hotels}">
-            <div class="hotel" th:style="'background-image: url(/images/' + ${hotel.getImageId()} + ');'">
-                <h1 th:text="${hotel.name}">ГОСТИНИЦА "АСТОРИЯ"</h1>
-                <p th:text="${hotel.address}">Большая Морская ул., 39</p>
-                <h2 th:text="${hotel.numOfStars}">от 27 000р./ночь</h2>
-                <a th:href="@{|/hotel/${hotel.id}|}" class="btn"><h3>ПОДРОБНЕЕ...</h3></a>
-            </div>
+    <h1>Добро пожаловать в Санкт-Петербург</h1>
+    <div id="first" th:each="hotel : ${hotels}">
+        <div class="hotel" th:style="'background-image: url(/images/' + ${hotel.getImageId()} + '); background-size: cover; '">
+            <h1 th:text="${hotel.name}">ГОСТИНИЦА "АСТОРИЯ"</h1>
+            <p th:text="${hotel.address}">Большая Морская ул., 39</p>
+            <h2 th:text="${hotel.numOfStars}">от 27 000р./ночь</h2>
+            <a th:href="@{|/hotel/${hotel.id}|}" class="btn"><h3>ПОДРОБНЕЕ...</h3></a>
         </div>
+    </div>
 </section>
 </body>
 </html>

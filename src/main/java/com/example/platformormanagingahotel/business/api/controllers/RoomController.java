@@ -22,7 +22,7 @@ public class RoomController {
         return "hotel_info";
     }
     @GetMapping("/{id}")
-    public String getRoomInfoPage(@RequestParam Long id,Model model){
+    public String getRoomInfoPage(@PathVariable Long id,Model model){
 
         model.addAttribute("room", roomService.findRoomById(id));
         return "room_info";
@@ -32,7 +32,7 @@ public class RoomController {
     public String thank(){
         return "thank_you";
     }
-    @PostMapping("/book/{id}")
+    @GetMapping("/book/{id}")
     public String bookRoom(@PathVariable Long id, Model model){
         RoomDto roomDto = roomService.bookRoom(id);
         model.addAttribute("room", roomService.findRoomById(roomDto.getId()));
