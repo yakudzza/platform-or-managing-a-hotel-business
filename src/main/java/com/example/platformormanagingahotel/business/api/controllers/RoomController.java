@@ -27,10 +27,16 @@ public class RoomController {
         model.addAttribute("room", roomService.findRoomById(id));
         return "room_info";
     }
+
+    @GetMapping("/thank_you")
+    public String thank(){
+        return "thank_you";
+    }
     @PostMapping("/book/{id}")
     public String bookRoom(@PathVariable Long id, Model model){
         RoomDto roomDto = roomService.bookRoom(id);
         model.addAttribute("room", roomService.findRoomById(roomDto.getId()));
-        return "room_info";
+        //return "room_info";
+        return "redirect:/room/thank_you";
     }
 }
